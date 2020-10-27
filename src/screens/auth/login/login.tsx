@@ -1,7 +1,21 @@
-import React, { FC, Fragment } from "react";
+import React, { Fragment } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import {
+  AuthStackParamsList,
+  AuthScreens,
+} from "../../../navigation/authStack";
 
-const Login: FC = () => {
+declare type NavigationProps = StackNavigationProp<
+  AuthStackParamsList,
+  AuthScreens.LoginScreen
+>;
+
+interface Props {
+  navigation: NavigationProps;
+}
+
+const Login = ({ navigation }: Props) => {
   return (
     <Fragment>
       <View style={styles.container}>
@@ -16,6 +30,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#fff",
   },
 });
 

@@ -1,7 +1,21 @@
-import React, { FC, Fragment } from "react";
+import React, { Fragment } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import {
+  MainAppStackParamsList,
+  MainAppScreens,
+} from "../../navigation/appStack";
 
-const Home: FC = () => {
+declare type NavigationProp = StackNavigationProp<
+  MainAppStackParamsList,
+  MainAppScreens.HomeScreen
+>;
+
+interface Props {
+  navigation: NavigationProp;
+}
+
+const Home = ({}: Props) => {
   return (
     <Fragment>
       <View style={styles.container}>

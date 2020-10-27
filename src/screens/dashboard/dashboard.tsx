@@ -1,7 +1,21 @@
-import React, { FC, Fragment } from "react";
+import React, { Fragment } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import {
+  MainAppStackParamsList,
+  MainAppScreens,
+} from "../../navigation/appStack";
 
-const Dashboard: FC = () => {
+declare type NavigationProp = StackNavigationProp<
+  MainAppStackParamsList,
+  MainAppScreens.DashboardScreen
+>;
+
+interface Props {
+  navigation: NavigationProp;
+}
+
+const Dashboard = ({}: Props) => {
   return (
     <Fragment>
       <View style={styles.container}>
