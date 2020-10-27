@@ -18,7 +18,11 @@ const { Navigator, Screen } = createStackNavigator<MainAppStackParamsList>();
 const MainAppNav: FC<any> = () => {
   return (
     <Fragment>
-      <Navigator>
+      <Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
         <Screen name={"HomeScreen"} component={HomeScreen} />
         <Screen name={"DashboardScreen"} component={DashboardScreen} />
       </Navigator>

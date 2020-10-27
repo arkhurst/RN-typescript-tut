@@ -17,9 +17,13 @@ const { Navigator, Screen } = createStackNavigator<AuthStackParamsList>();
 const AuthNavigator: FC<any> = () => {
   return (
     <Fragment>
-      <Navigator>
-        <Screen name={"LoginScreen"} component={LoginScreen} />
+      <Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
         <Screen name={"SignupScreen"} component={SignupScreen} />
+        <Screen name={"LoginScreen"} component={LoginScreen} />
       </Navigator>
     </Fragment>
   );
