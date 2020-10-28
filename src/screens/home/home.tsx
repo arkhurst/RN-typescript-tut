@@ -5,6 +5,8 @@ import {
   MainAppStackParamsList,
   MainAppScreens,
 } from "../../navigation/appStack";
+import { ButtonComponent } from "../../components";
+import Firebase from "firebase";
 
 declare type NavigationProp = StackNavigationProp<
   MainAppStackParamsList,
@@ -16,10 +18,13 @@ interface Props {
 }
 
 const Home = ({}: Props) => {
+  const _handleSignout = () => {
+    Firebase.auth().signOut();
+  };
   return (
     <Fragment>
       <View style={styles.container}>
-        <Text>Hello from Home</Text>
+        <ButtonComponent title="Sign out" onPress={_handleSignout} />
       </View>
     </Fragment>
   );

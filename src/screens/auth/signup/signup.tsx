@@ -7,6 +7,7 @@ import {
 } from "../../../navigation/authStack";
 import { TextInputComponent, ButtonComponent } from "../../../components";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import Firebase from "firebase";
 
 declare type NavigationProp = StackNavigationProp<
   AuthStackParamsList,
@@ -21,6 +22,27 @@ const Signup = ({ navigation }: Props) => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+  const _handleSignup = async () => {
+    if (name && email && password) {
+      try {
+        const user = await Firebase.auth().createUserWithEmailAndPassword(
+          email,
+          password
+        );
+        if (user) {
+          await Firebase.firestore()
+            .collection("users")
+            .doc(user?.user?.uid)
+            .set({ name, email, password });
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      Alert.alert(`Error occured`, `Missing fields`);
+    }
+  };
   return (
     <Fragment>
       <View style={styles.container}>
@@ -37,10 +59,7 @@ const Signup = ({ navigation }: Props) => {
           placeHolder="Password"
           onChangeText={(text) => setPassword(text)}
         />
-        <ButtonComponent
-          title="Sign Up"
-          onPress={() => Alert.alert("hey boo")}
-        />
+        <ButtonComponent title="Sign Up" onPress={_handleSignup} />
         <View style={styles.accountContainer}>
           <Text style={{ marginHorizontal: 5 }}>Already have an account?</Text>
           <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
